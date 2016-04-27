@@ -14,17 +14,21 @@ var router = function(nav){
 
 	twitterRouter.route('/')
 		.get(function(req, res){
-			twitter.getSearch({'q':'ola', 'lang': 'en', 'count': 100},
+					res.render('twitterListView');
+		});
+
+	twitterRouter.route('/xhr')
+		.get(function(req, res){
+			var search = req.query.q;
+			twitter.getSearch({'q': (search ? search : null), 'lang': 'en', 'count': 100},
 				function (err, response, body) {
     				console.log('ERROR----------');
     				console.log(err);
 				},
 				function (data) {
-    				data = JSON.parse(data)
-    				console.log(data.statuses);
-					res.render('twitterListView', {
-						tweets: data.statuses
-					});    				
+    				data = JSON.parse(data);
+					res.setHeader('Content-Type', 'application/json');
+    				res.send(JSON.stringify(data.statuses));   				
 				}
 			);
 		});

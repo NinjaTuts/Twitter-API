@@ -20,18 +20,50 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="/css/styles.css">
   <!-- endinject -->
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <![endif]-->
-    </head>
-    <body>
-      <% for(var i=0; i<tweets.length; i++){ %>
-        <p><b><%= tweets[i].user.name %>: </b><%= tweets[i].text %></p>         
-      <% } %>
-    </body>
-    <script type="text/javascript">
-    setTimeout(function(){
-       window.location.reload(1);
-    }, 300000);
-    </script>
+<!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+<body onload="getTweets()">
+  <div id="tweet-search">
+    <input type="text" name="" id="search">
+    <button onclick="searchTweet()">Search Tweet</button>
+  </div>
+  <div id="tweet-list"></div>    
+</body>
+
+<script type="text/javascript">
+  function getTweets(search) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        var result = JSON.parse(xhttp.responseText);
+        populateTweets(result);
+      }
+    };
+    xhttp.open("GET", "/twitter/xhr?"+ (search ? ('q='+search) : ''), true);
+    xhttp.send();
+  }
+
+  function populateTweets(result){
+    document.getElementById("tweet-list").innerHTML = '';
+    for(var i=0; i<result.length; i++){
+      var entity = document.createElement("P");         
+      var textentity = document.createTextNode(result[i].user.name+': '+result[i].text);
+      entity.appendChild(textentity);
+      document.getElementById("tweet-list").appendChild(entity);
+    }
+  }
+
+  function searchTweet(){
+    var search = document.getElementById('search').value;
+    getTweets(search);
+  }
+
+  setTimeout(function(){
+    searchTweet();
+  }, 30000);
+</script>
+
 </html>
