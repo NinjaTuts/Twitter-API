@@ -25,7 +25,7 @@
 <![endif]-->
 </head>
 
-<body onload="getTweets()">
+<body onload="searchTweet()">
   <div id="tweet-search">
     <input type="text" name="" id="search">
     <button onclick="searchTweet()">Search Tweet</button>
@@ -61,7 +61,7 @@
     getTweets(search);
   }
 
-  setTimeout(function(){
+  setInterval(function(){
     searchTweet();
   }, 30000);
 </script>
