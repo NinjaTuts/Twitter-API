@@ -51,10 +51,6 @@ var nav = [
 ];
 
 // defining controllers
-var bookRouter = require('./src/routes/bookRouter')(nav);
-var adminRouter = require('./src/routes/adminRouter')(nav);
 var twitterRouter = require('./src/routes/twitterRouter')(nav);
 
-app.use('/books', bookRouter);
-app.use('/admin', adminRouter);
 app.use('/twitter', twitterRouter);
