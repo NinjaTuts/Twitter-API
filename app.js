@@ -51,6 +51,6 @@ var nav = [
 ];
 
 // defining controllers
-var twitterRouter = require('./src/routes/twitterRouter')(nav);
+var twitterRouter = require('./src/routes/twitter')(nav);
 
 app.use('/twitter', twitterRouter);

@@ -1,24 +1,24 @@
 var express = require('express');
-var twitterRouter = express.Router();
+var twitterRoute = express.Router();
 
 var Twitter = require('twitter-node-client').Twitter;
 var config = {
-	"consumerKey": "0MgbC5pl7dB2LyJzy5avL2ojm",
-	"consumerSecret": "Nu8whvHO7bN2MAF8WNisoWhj1jfu9M1DCjJBblxHQOSHlTESlm",
-	"accessToken": "452771912-MZhMp2pC3KaNYecv8oyzU1WPQIlf3oqUm3yH10iR",
-	"accessTokenSecret": "eZwiRmzAkSQsUcUkCcM1Vew7uOEGeg8W1yTjJtW8PFLLR",
+	"consumerKey"					: "0MgbC5pl7dB2LyJzy5avL2ojm",
+	"consumerSecret"			: "Nu8whvHO7bN2MAF8WNisoWhj1jfu9M1DCjJBblxHQOSHlTESlm",
+	"accessToken"					: "452771912-MZhMp2pC3KaNYecv8oyzU1WPQIlf3oqUm3yH10iR",
+	"accessTokenSecret"		: "eZwiRmzAkSQsUcUkCcM1Vew7uOEGeg8W1yTjJtW8PFLLR"
 }
+
 var twitter = new Twitter(config);
+var router = function(nav) {
 
-var router = function(nav){
-
-	twitterRouter.route('/')
-		.get(function(req, res){
+	twitterRoute.route('/')
+		.get(function(req, res) {
 					res.render('twitterListView');
 		});
 
-	twitterRouter.route('/xhr')
-		.get(function(req, res){
+	twitterRoute.route('/xhr')
+		.get(function(req, res) {
 			var search = req.query.q;
 			twitter.getSearch({'q': (search ? search : null), 'lang': 'en', 'count': 100},
 				function (err, response, body) {
@@ -33,7 +33,7 @@ var router = function(nav){
 			);
 		});
 
-	return twitterRouter;
+	return twitterRoute;
 };
 
 module.exports = router;
