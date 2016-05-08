@@ -14,21 +14,27 @@ var router = function(nav) {
 
 	twitterRoute.route('/')
 		.get(function(req, res) {
-					res.render('twitterListView');
+			res.render('twitterListView');
 		});
 
-	twitterRoute.route('/xhr')
+	twitterRoute.route('/search')
 		.get(function(req, res) {
 			var search = req.query.q;
-			twitter.getSearch({'q': (search ? search : null), 'lang': 'en', 'count': 100},
+			var count = req.query.count;
+			twitter.getSearch(
+				{
+					'q': (search ? search : null),
+					'lang': 'en',
+					'count': (count ? count : 20)
+				},
 				function (err, response, body) {
-    				console.log('ERROR----------');
-    				console.log(err);
+  				console.log('ERROR----------');
+  				console.log(err);
 				},
 				function (data) {
-    				data = JSON.parse(data);
+  				data = JSON.parse(data);
 					res.setHeader('Content-Type', 'application/json');
-    				res.send(JSON.stringify(data.statuses));   				
+  				res.send(JSON.stringify(data.statuses));   				
 				}
 			);
 		});

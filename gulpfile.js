@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var notify = require('gulp-notify');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var nodemon = require('nodemon');
@@ -14,38 +15,30 @@ gulp.task('style', function(){
 	.pipe(jscs());
 });
 
-gulp.task('inject', function(){
-	// wiredep configutation
-	var wiredep = require('wiredep').stream;
-	var options = {
-		bowerJson : require('./bower.json'),
-		directory : './public/lib',
-		ignorePath: '../../public'
-	};
+/**
+ *
+ * Copy CSS, SCSS and JS dependencies from bower_components to respective folders
+ *
+*/
+gulp.task('copyBower', function() {
+	return gulp.src('bower_components/bootstrap/dist/css/bootstrap.min.css')
+	  .pipe(gulp.dest('./public/css')),
 
-	// gulp-inject configutation
-	var inject = require('gulp-inject');
-	var injectSrc = gulp.src(
-						['./public/js/*.js','./public/css/*.css'], 
-						{read : false}
-					);
-	var injectOptions = {
-		ignorePath: '/public'
-	};
+	  gulp.src('bower_components/bootstrap/dist/fonts/**')
+	  .pipe(gulp.dest('./public/fonts')),
 
-	return gulp.src('./src/views/*.jade')
-	.pipe(wiredep(options))
-	.pipe(inject(injectSrc, injectOptions))
-	.pipe(gulp.dest('./src/views'));
+		gulp.src('bower_components/bootstrap/dist/js/bootstrap.min.js')
+	  .pipe(gulp.dest('./public/js')),
+
+	  gulp.src('bower_components/jquery/dist/jquery.min.js')
+	  .pipe(gulp.dest('./public/js'))
+		.pipe(notify({ message: 'Copied Bower dependencies', onLast: true }));
 });
 
-gulp.task('serve', function(){
+gulp.task('serve', function() {
 	var options = {
 		script: 'app.js',
 		delayTime: 1,
-		env:{
-			'PORT': 5000
-		},
 		watch: jsfiles
 	};
 

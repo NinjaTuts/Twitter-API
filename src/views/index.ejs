@@ -3,34 +3,48 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
-  <title>Storystrap Template</title>
+  <title>Twitter API using Node.js</title>
   <meta name="generator" content="Bootply" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <!-- bower:css -->
-  <!-- <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" /> -->
-  <!-- <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" /> -->
-  <!-- endbower -->
-  <!-- bower:js -->
-  <!-- <script src="/lib/jquery/dist/jquery.js"></script> -->
-  <!-- <script src="/lib/bootstrap/dist/js/bootstrap.js"></script> -->
-  <!-- endbower -->
-  
-  <!-- inject:css -->
-  <link rel="stylesheet" href="/css/styles.css">
-  <!-- endinject -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/style.css">
 <!--[if lt IE 9]>
 <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 </head>
 
 <body>
-  <form id="tweet-search" action="">
-    <input type="text" name="search" id="search">
-    <input type="submit" value="Search Tweet">
-  </form>
-  <div id="tweet-list"></div>
-  <!-- inject:js -->
-  <script src="/js/app.js"></script>
-  <!-- endinject -->
+  <div class="container search-container">
+    <h2 class="text-center">Twitter API</h2>
+    <form id="tweet-search" action="" class="form-inline">
+      <div class="form-group">
+        <label for="search">Search: </label>
+        <input type="text" name="search" id="search" class="form-control" placeholder="Enter Search Term">
+      </div>
+      <div class="form-group">
+        <label for="js-tweet-count">Tweet Count: </label>
+        <select class="form-control" name="tweet-count" id="js-tweet-count">
+          <option>10</option>
+          <option>20</option>
+          <option>30</option>
+          <option>40</option>
+          <option>50</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    
+    <div class="loader">
+      <img src="img/ajax-loader.gif" alt="Loading...">
+    </div>
+
+    <div id="tweet-list" class="well tweet-list">
+      <h3>Please search using the above form</h3>
+    </div>
+  </div>
+  
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 </html>

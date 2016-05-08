@@ -11,21 +11,22 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "express": "~4.13.4",
-    "jade": "~1.11.0",
-    "express-handlebars": "~3.0.0",
-    "ejs": "~2.4.1",
-    "mongodb": "~2.1.7",
-    "twitter-node-client": "0.0.6"
+    "express": "*",
+    "jade": "*",
+    "express-handlebars": "*",
+    "ejs": "*",
+    "mongodb": "*",
+    "twitter-node-client": "*"
   },
   "devDependencies": {
-    "gulp": "~3.9.1",
-    "jshint-stylish": "~2.1.0",
-    "gulp-jshint": "~2.0.0",
-    "gulp-jscs": "~3.0.2",
-    "jshint": "~2.9.1",
-    "wiredep": "~3.0.0",
-    "gulp-inject": "~3.0.0",
-    "nodemon": "~1.9.1"
+    "gulp": "*",
+    "gulp-inject": "*",
+    "gulp-jscs": "*",
+    "gulp-jshint": "*",
+    "gulp-notify": "*",
+    "jshint": "*",
+    "jshint-stylish": "*",
+    "nodemon": "*",
+    "wiredep": "*"
   }
 }
