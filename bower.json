@@ -1,9 +1,9 @@
 {
-  "name": "library",
+  "name": "twitter-api-js",
   "description": "",
   "main": "app.js",
   "authors": [
-    "km-sagar <harsha@liftoffllc.com>"
+    "NinjaTuts <code@ninjatuts.com>"
   ],
   "license": "BSD-2-Clause",
   "moduleType": [],
